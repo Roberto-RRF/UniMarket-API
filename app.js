@@ -19,10 +19,44 @@ const PRODUCTOS = [
     {
         productoId: "iue87q4hA-AOUHFSD-DFFD",
         nombre: 'Laptop',
-        tipo:"",
+        tipo: "",
         precio: 12000,
-
-
+        vendidos: 0,
+        status: true,
+        descripcion: "Laptop de escritorio",
+        usuarioId: "0236851",
+        universidadId: "Campus Mixcoac",
+        interesadosId: [],
+        fecha: new Date(),
+        categorias: "",
+    },
+    {
+        productoId: "ewpn9w8wfm.f-wefkwe",
+        nombre: 'Bicicleta',
+        tipo: "",
+        precio: 3000,
+        vendidos: 0,
+        status: true,
+        descripcion: "Bicicleta de montaña",
+        usuarioId: "0236851",
+        universidadId: "Campus Mixcoac",
+        interesadosId: [],
+        fecha: new Date(),
+        categorias: "",
+    },
+    {
+        productoId: "iue87q4hA-AOUHFSD-DFFD",
+        nombre: 'Telefono',
+        tipo: "",
+        precio: 8000,
+        vendidos: 0,
+        status: true,
+        descripcion: "Telefono movil",
+        usuarioId: "0236851",
+        universidadId: "Campus Mixcoac",
+        interesadosId: [],
+        fecha: new Date(),
+        categorias: "",
     }
 ]
 
@@ -32,22 +66,21 @@ app.get("/", (req, res) => {
 });
 
 
-app.post("/login", (req, res)=>{
+app.post("/login", (req, res) => {
     const {usuarioId, constrasena} = req.body;
     const user = USERS.find(user => user.usuarioId === usuarioId && user.constrasena === constrasena);
-    if(!user){
+    if (!user) {
         res.status(400).send("Usuario o contraseña incorrectos");
     }
     res.send(user);
 });
 
-app.post("/register",(req,res)=>{
+app.post("/register", (req, res) => {
     const {usuarioId, nombre, carrera, email, celular, constrasena} = req.body;
     const user = USERS.find(user => user.usuarioId === usuarioId);
-    if(user){
+    if (user) {
         res.status(400).send("Usuario ya existe");
-    }
-    else{
+    } else {
         USERS.push({
             usuarioId,
             nombre,
@@ -60,6 +93,9 @@ app.post("/register",(req,res)=>{
     }
 });
 
+app.get("/posts", (req, res) => {
+    res.send(PRODUCTOS);
+});
 
 app.listen(3000, () => {
     console.log("Server is running on port 3000");
