@@ -1,4 +1,5 @@
 const express = require('express');
+const ip = require('ip');
 
 const app = express();
 app.use(express.json());
@@ -30,6 +31,7 @@ app.get("/", (req, res) => {
     res.send("Service is Working!");
 });
 
+
 app.post("/login", (req, res)=>{
     const {usuarioId, constrasena} = req.body;
     const user = USERS.find(user => user.usuarioId === usuarioId && user.constrasena === constrasena);
@@ -42,4 +44,5 @@ app.post("/login", (req, res)=>{
 
 app.listen(3000, () => {
     console.log("Server is running on port 3000");
+    console.log(`Server IP: ${ip.address()}`);
 });
