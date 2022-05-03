@@ -17,7 +17,7 @@ const USERS = [
 
 const PRODUCTOS = [
     {
-        productoId: "iue87q4hA-AOUHFSD-DFFD",
+        productoId: 6564398733,
         nombre: 'Laptop',
         tipo: "",
         precio: 12000,
@@ -31,7 +31,7 @@ const PRODUCTOS = [
         categorias: "",
     },
     {
-        productoId: "ewpn9w8wfm.f-wefkwe",
+        productoId: 275683938,
         nombre: 'Bicicleta',
         tipo: "",
         precio: 3000,
@@ -45,7 +45,7 @@ const PRODUCTOS = [
         categorias: "",
     },
     {
-        productoId: "iue87q4hA-AOUHFSD-DFFD",
+        productoId: 664733047463,
         nombre: 'Telefono',
         tipo: "",
         precio: 8000,
@@ -143,6 +143,18 @@ app.put("/posts", (req, res) => {
         res.send("Producto actualizado");
     }
 
+});
+
+app.delete("/posts", (req, res) => {
+    const {productoId} = req.body;
+    const producto = PRODUCTOS.find(producto => producto.productoId === productoId);
+    if (!producto) {
+        res.status(400).send("Producto no encontrado");
+    } else {
+        const index = PRODUCTOS.indexOf(producto);
+        PRODUCTOS.splice(index, 1);
+        res.send("Producto eliminado");
+    }
 });
 
 app.listen(3000, () => {
