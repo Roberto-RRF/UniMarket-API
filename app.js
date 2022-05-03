@@ -60,7 +60,6 @@ const PRODUCTOS = [
     }
 ]
 
-
 app.get("/", (req, res) => {
     res.send("Bienvenido a la API de la Universidad");
 });
@@ -93,6 +92,14 @@ app.post("/register", (req, res) => {
 });
 
 app.get("/posts", (req, res) => {
+    //remplazar por el id del usuario
+    for (let i = 0; i < PRODUCTOS.length; i++) {
+        const userid = PRODUCTOS[i].usuarioId;
+        const index = USERS.findIndex(user => user.usuarioId === userid);
+        if (index !== -1) {
+            PRODUCTOS[i].usuario = USERS[index];
+        }
+    }
     res.send(PRODUCTOS);
 });
 
