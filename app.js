@@ -62,9 +62,8 @@ const PRODUCTOS = [
 
 
 app.get("/", (req, res) => {
-    res.send("Service is Working!");
+    res.send("Bienvenido a la API de la Universidad");
 });
-
 
 app.post("/login", (req, res) => {
     const {usuarioId, constrasena} = req.body;
@@ -95,6 +94,55 @@ app.post("/register", (req, res) => {
 
 app.get("/posts", (req, res) => {
     res.send(PRODUCTOS);
+});
+
+app.post("/posts", (req, res) => {
+    const {nombre, tipo, precio, status, descripcion, usuarioId, categorias} = req.body;
+
+    PRODUCTOS.push({
+        productoId: Math.random() * (10000),
+        nombre,
+        tipo,
+        precio,
+        vendidos: 0,
+        status,
+        descripcion,
+        usuarioId,
+        universidadId: "Campus Mixcoac",
+        interesadosId: [],
+        fecha: new Date(),
+        categorias
+    });
+    res.send(PRODUCTOS[PRODUCTOS.length - 1]);
+});
+
+app.put("/posts", (req, res) => {
+    const {productoId, nombre, tipo, precio, status, descripcion, usuarioId, categorias} = req.body;
+    const producto = PRODUCTOS.find(producto => producto.productoId === productoId);
+    if (!producto) {
+        res.status(400).send("Producto no encontrado");
+    } else {
+        const index = PRODUCTOS.indexOf(producto);
+
+        const newProduct = {
+            productoId,
+            nombre,
+            tipo,
+            precio,
+            vendidos: 0,
+            status,
+            descripcion,
+            usuarioId,
+            universidadId: PRODUCTOS[index].universidadId,
+            interesadosId: PRODUCTOS[index].interesadosId,
+            fecha: PRODUCTOS[index].fecha,
+            categorias
+        };
+
+        PRODUCTOS[index] = newProduct;
+        res.send("Producto actualizado");
+    }
+
 });
 
 app.listen(3000, () => {
