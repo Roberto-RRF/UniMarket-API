@@ -41,6 +41,25 @@ app.post("/login", (req, res)=>{
     res.send(user);
 });
 
+app.post("/register",(req,res)=>{
+    const {usuarioId, nombre, carrera, email, celular, constrasena} = req.body;
+    const user = USERS.find(user => user.usuarioId === usuarioId);
+    if(user){
+        res.status(400).send("Usuario ya existe");
+    }
+    else{
+        USERS.push({
+            usuarioId,
+            nombre,
+            carrera,
+            email,
+            celular,
+            constrasena
+        });
+        res.send("Usuario registrado");
+    }
+});
+
 
 app.listen(3000, () => {
     console.log("Server is running on port 3000");
