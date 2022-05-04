@@ -13,6 +13,14 @@ const USERS = [
         celular: "55-55-55-55-55",
         constrasena: "1234"
     },
+    {
+        usuarioId: "0223499",
+        nombre: 'Juan Carlos',
+        carrera: 'Ing. TI',
+        email: "0223499@up.edu.mx",
+        celular: "55-55-55-55-55",
+        constrasena: "1234"
+    }
 ]
 
 const PRODUCTOS = [
@@ -120,7 +128,7 @@ app.post("/posts", (req, res) => {
         fecha: new Date(),
         categorias
     });
-    res.send(JSON.stringify(PRODUCTOS[PRODUCTOS.length - 1]));
+    res.send(JSON.stringify({message: "Producto Agregado"}));
 });
 
 app.put("/posts", (req, res) => {
