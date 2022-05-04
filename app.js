@@ -87,7 +87,7 @@ app.post("/register", (req, res) => {
             celular,
             constrasena
         });
-        res.send("Usuario registrado");
+        res.send(JSON.stringify({message: "Usuario registrado"}));
     }
 });
 
@@ -147,7 +147,7 @@ app.put("/posts", (req, res) => {
         };
 
         PRODUCTOS[index] = newProduct;
-        res.send("Producto actualizado");
+        res.send(JSON.stringify({message: "Producto actualizado"}));
     }
 
 });
@@ -160,7 +160,7 @@ app.delete("/posts", (req, res) => {
     } else {
         const index = PRODUCTOS.indexOf(producto);
         PRODUCTOS.splice(index, 1);
-        res.send("Producto eliminado");
+        res.send(JSON.stringify({message: "Producto eliminado"}));
     }
 });
 
