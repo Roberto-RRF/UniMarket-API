@@ -70,7 +70,7 @@ app.post("/login", (req, res) => {
     if (!user) {
         res.status(400).send("Usuario o contraseña incorrectos");
     }
-    res.send(JSOS.stringify(user));
+    res.send(JSON.stringify(user));
 });
 
 app.post("/register", (req, res) => {
