@@ -70,7 +70,7 @@ app.post("/login", (req, res) => {
     if (!user) {
         res.status(400).send("Usuario o contraseña incorrectos");
     }
-    res.send(user);
+    res.send(JSOS.stringify(user));
 });
 
 app.post("/register", (req, res) => {
@@ -100,7 +100,7 @@ app.get("/posts", (req, res) => {
             PRODUCTOS[i].usuario = USERS[index];
         }
     }
-    res.send(PRODUCTOS);
+    res.send(JSON.stringify(PRODUCTOS));
 });
 
 app.post("/posts", (req, res) => {
@@ -120,7 +120,7 @@ app.post("/posts", (req, res) => {
         fecha: new Date(),
         categorias
     });
-    res.send(PRODUCTOS[PRODUCTOS.length - 1]);
+    res.send(JSON.stringify(PRODUCTOS[PRODUCTOS.length - 1]));
 });
 
 app.put("/posts", (req, res) => {
